@@ -7,6 +7,8 @@
             <Menu Height="20" >
                 <MenuItem Header="File">
                     <MenuItem Header="Set User" Click="SetUser_Click"/>
+                    <MenuItem Header="Open Project" Click="OpenProject_Click"/>
+                    <MenuItem Header="New Project" Click="NewProject_Click"/>
                     <MenuItem Header="Add Bug" Click="AddBug_Click"/>
                     <Separator/>
                     <MenuItem Header="Exit" Click="Exit_Click"/>
