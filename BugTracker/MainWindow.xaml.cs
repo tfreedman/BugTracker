@@ -18,6 +18,9 @@ namespace BugTracker {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
+        string currentUser = "";
+
         public MainWindow() {
             InitializeComponent();
         }
@@ -25,6 +28,14 @@ namespace BugTracker {
         private void AddBug_Click(object sender, RoutedEventArgs e) {
             var dialog = new AddBug();
             dialog.ShowDialog();
+        }
+
+        private void SetUser_Click(object sender, RoutedEventArgs e) {
+            var dialog = new SetUser();
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value) {
+                currentUser = dialog.UsernameBox.Text;
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) {
