@@ -21,5 +21,14 @@ namespace BugTracker {
         public MainWindow() {
             InitializeComponent();
         }
+
+        private void AddBug_Click(object sender, RoutedEventArgs e) {
+            var dialog = new AddBug();
+            dialog.ShowDialog();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
     }
 }
