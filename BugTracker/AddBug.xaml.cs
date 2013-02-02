@@ -1,24 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BugTracker {
     /// <summary>
     /// Interaction logic for AddBug.xaml
     /// </summary>
     public partial class AddBug : Window {
-        public AddBug() {
+        public AddBug(string currentUser, string currentProject) {
             InitializeComponent();
+            Username.Content = currentUser;
+            ProjectName.Content = currentProject;
+        }
+
+        private void OK_Click(object sender, RoutedEventArgs e) {           
+            StreamWriter sw = File.AppendText(@".\Bugs.csv");
+            sw.WriteLine("");
+            sw.Write(ProjectName.Content);
+            sw.Write(",");
+            sw.Write(Username.Content);
+            sw.Write(",");
+            sw.Write(DateTime.Now);
+            sw.Write(",");
+            sw.Write(BugName.Text);
+            sw.Write(",");
+            sw.Write(BugDescription.Text);
+            sw.Flush();
+            sw.Close();
+
+            this.DialogResult = true;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e) {
+            this.DialogResult = false;
         }
     }
 }
