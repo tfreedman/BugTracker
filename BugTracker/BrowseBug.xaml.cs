@@ -27,7 +27,6 @@ namespace BugTracker {
                     BugType.Content = bug[7];
                     break;
                 }
-
             }
             file.Close();
         }

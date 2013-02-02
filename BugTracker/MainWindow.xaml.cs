@@ -17,6 +17,36 @@ namespace BugTracker {
 
         public MainWindow() {
             InitializeComponent();
+            try {
+                StreamReader file = new StreamReader(@".\CurrentData.csv");
+                string line = file.ReadLine();
+                String[] data = line.Split(',');
+                file.Close();
+
+                ArrayList list = new ArrayList();
+                file = new StreamReader(@".\Users.csv");
+                while ((line = file.ReadLine()) != null) {
+                    String[] users = line.Split(',');
+                    list.Add(users);
+                }
+                for (int i = 0; i < list.Count; i++) {
+                    string[] user = (string[])(list[i]);
+                    if (data[0].Equals(user[0])) {
+                        currentUser = data[0];
+                        currentProject = data[1];
+                        Menu_Open.IsEnabled = true;
+                        Menu_New.IsEnabled = true;
+                        Menu_Add.IsEnabled = true;
+                    }
+                }
+                file.Close();
+                spawnDialog = false;
+                OpenProject_Click(new object(), new RoutedEventArgs());
+                spawnDialog = true;
+            }
+            catch (Exception e) {
+                //Do nothing, because we don't care if there's no previously-saved data.
+            }
         }
 
         private void AddBug_Click(object sender, RoutedEventArgs e) {
@@ -30,12 +60,15 @@ namespace BugTracker {
             dialog.ShowDialog();
         }
 
+        bool spawnDialog = true;
+
         private void OpenProject_Click(object sender, RoutedEventArgs e) {
-            var dialog = new OpenProject();
-            dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-                currentProject = ((string)((ComboBoxItem)(dialog.ProjectList.SelectedItem)).Content);
-            
+            if (spawnDialog) {
+                var dialog = new OpenProject();
+                dialog.ShowDialog();
+                if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                    currentProject = ((string)((ComboBoxItem)(dialog.ProjectList.SelectedItem)).Content);
+            }
             List<Bugs> bugs = new List<Bugs>();
             StreamReader file = new StreamReader(@".\Bugs.csv");
             string line;
@@ -47,20 +80,26 @@ namespace BugTracker {
             BugList.ItemsSource = bugs;
             BugList.Opacity = 1;
             file.Close();
+            Menu_Add.IsEnabled = true;
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e) {
             var dialog = new NewProject();
             dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value) {
                 currentProject = dialog.ProjectName.Text;
+                Menu_Add.IsEnabled = true;
+            } 
         }
 
         private void SetUser_Click(object sender, RoutedEventArgs e) {
             var dialog = new SetUser();
             dialog.ShowDialog();
-            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value) {
                 currentUser = dialog.UsernameBox.Text;
+                Menu_Open.IsEnabled = true;
+                Menu_New.IsEnabled = true;
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) {
