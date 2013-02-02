@@ -14,6 +14,18 @@
                     <MenuItem Header="Exit" Click="Exit_Click"/>
                 </MenuItem>
             </Menu>
+            <DataGrid Name="BugList" GridLinesVisibility="None" IsReadOnly="True" Opacity="0" SelectionUnit="FullRow" Height="297">
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="MouseDoubleClick" Handler="resultDataGrid_MouseDoubleClick"/>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </Window>

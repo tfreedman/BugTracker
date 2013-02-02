@@ -17,6 +17,8 @@ namespace BugTracker {
         private void OK_Click(object sender, RoutedEventArgs e) {           
             StreamWriter sw = File.AppendText(@".\Bugs.csv");
             sw.WriteLine("");
+            sw.Write("7");
+            sw.Write(",");
             sw.Write(ProjectName.Content);
             sw.Write(",");
             sw.Write(Username.Content);
