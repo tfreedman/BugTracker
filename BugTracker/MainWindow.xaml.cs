@@ -43,6 +43,7 @@ namespace BugTracker {
                 spawnDialog = false;
                 OpenProject_Click(new object(), new RoutedEventArgs());
                 spawnDialog = true;
+                Session.Header = currentUser + " on " + currentProject;
             }
             catch (Exception e) {
                 //Do nothing, because we don't care if there's no previously-saved data.
@@ -81,6 +82,12 @@ namespace BugTracker {
             BugList.Opacity = 1;
             file.Close();
             Menu_Add.IsEnabled = true;
+
+            StreamWriter sw = new StreamWriter(@".\CurrentData.csv");
+            sw.Write(currentUser + "," + currentProject);
+            sw.Flush();
+            sw.Close();
+            Session.Header = currentUser + " on " + currentProject;
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e) {
@@ -89,6 +96,11 @@ namespace BugTracker {
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value) {
                 currentProject = dialog.ProjectName.Text;
                 Menu_Add.IsEnabled = true;
+                StreamWriter sw = new StreamWriter(@".\CurrentData.csv");
+                sw.Write(currentUser + "," + currentProject);
+                sw.Flush();
+                sw.Close();
+                Session.Header = currentUser + " on " + currentProject;
             } 
         }
 
@@ -99,6 +111,7 @@ namespace BugTracker {
                 currentUser = dialog.UsernameBox.Text;
                 Menu_Open.IsEnabled = true;
                 Menu_New.IsEnabled = true;
+                Session.Header = currentUser;
             }
         }
 

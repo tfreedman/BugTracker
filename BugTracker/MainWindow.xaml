@@ -5,6 +5,11 @@
     <Grid>
         <StackPanel>
             <Menu Height="20" >
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
                 <MenuItem Header="File">
                     <MenuItem Header="Set User" Click="SetUser_Click"/>
                     <MenuItem Header="Open Project" Click="OpenProject_Click" IsEnabled="False" Name="Menu_Open"/>
@@ -13,8 +18,10 @@
                     <Separator/>
                     <MenuItem Header="Exit" Click="Exit_Click"/>
                 </MenuItem>
+                <MenuItem Name="Session"  IsEnabled="False" IsCheckable="False" IsHitTestVisible="False" HorizontalAlignment="Right"/>
+                
             </Menu>
-            <DataGrid Name="BugList" GridLinesVisibility="None" IsReadOnly="True" Opacity="0" SelectionUnit="FullRow" Height="297">
+        <DataGrid Name="BugList" GridLinesVisibility="None" IsReadOnly="True" Opacity="0" SelectionUnit="FullRow" Height="297">
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell">
                         <Setter Property="BorderThickness" Value="0"/>
