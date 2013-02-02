@@ -21,7 +21,7 @@
                 <MenuItem Name="Session"  IsEnabled="False" IsCheckable="False" IsHitTestVisible="False" HorizontalAlignment="Right"/>
                 
             </Menu>
-        <DataGrid Name="BugList" GridLinesVisibility="None" IsReadOnly="True" Opacity="0" SelectionUnit="FullRow" Height="297">
+        <DataGrid Name="BugList" GridLinesVisibility="None" IsReadOnly="True" Opacity="0" SelectionUnit="FullRow" Height="Auto">
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell">
                         <Setter Property="BorderThickness" Value="0"/>

@@ -3,9 +3,6 @@ using System.Collections;
 using System.Windows;
 
 namespace BugTracker {
-    /// <summary>
-    /// Interaction logic for SetUser.xaml
-    /// </summary>
     public partial class SetUser : Window {
         public SetUser() {
             InitializeComponent();

@@ -5,26 +5,16 @@ using System.IO;
 using System.Windows;
 
 namespace BugTracker {
-    /// <summary>
-    /// Interaction logic for AddBug.xaml
-    /// </summary>
     public partial class BrowseBug : Window {
         public BrowseBug(string ID) {
             InitializeComponent();
 
-            List<Bugs> bugs = new List<Bugs>();
             StreamReader file = new StreamReader(@".\Bugs.csv");
             string line;
             while ((line = file.ReadLine()) != null) {
                 String[] bug = line.Split(',');
                 if (bug[0].Equals(ID)) {
-                    ProjectName.Content = bug[1];
-                    Username.Content = bug[2];
-                    BugDate.Content = bug[3];
-                    BugName.Content = bug[4];
-                    BugDescription.Content = bug[5];
-                    BugSeverity.Content = bug[6];
-                    BugType.Content = bug[7];
+                    Username.Content = bug[2];  BugDate.Content = bug[3];  BugName.Content = bug[4];  BugDescription.Content = bug[5];  BugSeverity.Content = bug[6];  BugType.Content = bug[7];
                     break;
                 }
             }
@@ -37,6 +27,10 @@ namespace BugTracker {
 
         private void Cancel_Click(object sender, RoutedEventArgs e) {
             this.DialogResult = false;
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }

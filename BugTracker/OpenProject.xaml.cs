@@ -2,9 +2,6 @@
 using System.Windows.Controls;
 
 namespace BugTracker {
-    /// <summary>
-    /// Interaction logic for OpenProject.xaml
-    /// </summary>
     public partial class OpenProject : Window {
         public OpenProject() {
             InitializeComponent();

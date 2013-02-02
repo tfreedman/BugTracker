@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BugTracker.AddBug"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddBug" Height="322" Width="543">
+        Title="Add a Bug" Height="322" Width="543">
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="38,47,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="429" Name="BugName"/>

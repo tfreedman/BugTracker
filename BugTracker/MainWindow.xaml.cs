@@ -7,9 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace BugTracker {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
         
         string currentUser = "";
@@ -75,7 +72,8 @@ namespace BugTracker {
             string line;
             while ((line = file.ReadLine()) != null) {
                 String[] bug = line.Split(',');
-                bugs.Add(new Bugs() { ID = bug[0], Project = bug[1], Username = bug[2], Date = bug[3], Name = bug[4], Description = bug[5], Severity = bug[6], Type = bug[7] });
+                if (bug[1].Equals(currentProject))
+                    bugs.Add(new Bugs() { ID = bug[0], Project = bug[1], Username = bug[2], Date = bug[3], Name = bug[4], Description = bug[5], Severity = bug[6], Type = bug[7] });
             }
 
             BugList.ItemsSource = bugs;

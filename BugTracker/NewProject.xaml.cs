@@ -4,9 +4,6 @@ using System.IO;
 using System.Windows;
 
 namespace BugTracker {
-    /// <summary>
-    /// Interaction logic for NewProject.xaml
-    /// </summary>
     public partial class NewProject : Window {
         public NewProject() {
             InitializeComponent();
