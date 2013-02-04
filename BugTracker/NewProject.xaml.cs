@@ -2,9 +2,11 @@
 using System.Collections;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BugTracker {
     public partial class NewProject : Window {
+
         public NewProject() {
             InitializeComponent();
         }
@@ -28,8 +30,8 @@ namespace BugTracker {
             }
             if (!existingProjects) {
                 StreamWriter sw = File.AppendText(@".\Projects.csv");
-                sw.WriteLine("");
                 sw.Write(ProjectName.Text);
+                sw.WriteLine("");
                 sw.Flush();
                 sw.Close();
                 this.DialogResult = true;
@@ -39,5 +41,6 @@ namespace BugTracker {
         private void Cancel_Click(object sender, RoutedEventArgs e) {
             this.DialogResult = false;
         }
+
     }
 }

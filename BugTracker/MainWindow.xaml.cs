@@ -11,6 +11,8 @@ namespace BugTracker {
         
         string currentUser = "";
         string currentProject = "";
+        string severity = "";
+        string bugType = "";
 
         public MainWindow() {
             InitializeComponent();
@@ -50,6 +52,27 @@ namespace BugTracker {
         private void AddBug_Click(object sender, RoutedEventArgs e) {
             var dialog = new AddBug(currentUser, currentProject);
             dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+            {
+                severity = ((string)((ComboBoxItem)(dialog.Severity.SelectedItem)).Content);
+                bugType = ((string)((ComboBoxItem)(dialog.BugType.SelectedItem)).Content);
+            }
+            dialog.Write_Bug(severity, bugType);
+
+            List<Bugs> bugs = new List<Bugs>();
+            StreamReader file = new StreamReader(@".\Bugs.csv");
+            string line;
+            while ((line = file.ReadLine()) != null)
+            {
+                String[] bug = line.Split(',');
+                Console.WriteLine(line + " " + bug.Length);
+                if (bug[1].Equals(currentProject))
+                    bugs.Add(new Bugs() { ID = bug[0], Project = bug[1], Username = bug[2], Date = bug[3], Name = bug[4], Description = bug[5], Severity = bug[6], Type = bug[7] });
+            }
+
+            BugList.ItemsSource = bugs;
+            BugList.Opacity = 1;
+            file.Close();
         }
 
         private void resultDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
@@ -72,6 +95,7 @@ namespace BugTracker {
             string line;
             while ((line = file.ReadLine()) != null) {
                 String[] bug = line.Split(',');
+                Console.WriteLine(line + " " + bug.Length);
                 if (bug[1].Equals(currentProject))
                     bugs.Add(new Bugs() { ID = bug[0], Project = bug[1], Username = bug[2], Date = bug[3], Name = bug[4], Description = bug[5], Severity = bug[6], Type = bug[7] });
             }
@@ -93,7 +117,23 @@ namespace BugTracker {
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value) {
                 currentProject = dialog.ProjectName.Text;
+
+                List<Bugs> bugs = new List<Bugs>();
+                StreamReader file = new StreamReader(@".\Bugs.csv");
+                string line;
+                while ((line = file.ReadLine()) != null)
+                {
+                    String[] bug = line.Split(',');
+                    Console.WriteLine(line + " " + bug.Length);
+                    if (bug[1].Equals(currentProject))
+                        bugs.Add(new Bugs() { ID = bug[0], Project = bug[1], Username = bug[2], Date = bug[3], Name = bug[4], Description = bug[5], Severity = bug[6], Type = bug[7] });
+                }
+
+                BugList.ItemsSource = bugs;
+                BugList.Opacity = 1;
+                file.Close();
                 Menu_Add.IsEnabled = true;
+
                 StreamWriter sw = new StreamWriter(@".\CurrentData.csv");
                 sw.Write(currentUser + "," + currentProject);
                 sw.Flush();
@@ -114,6 +154,10 @@ namespace BugTracker {
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) {
+            StreamWriter sw = new StreamWriter(@".\CurrentData.csv");
+            //sw.Write("");
+            sw.Flush();
+            sw.Close();
             this.Close();
         }
     }

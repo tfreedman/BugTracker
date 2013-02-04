@@ -14,8 +14,8 @@
         <Label Content="$USERNAME" HorizontalAlignment="Left" Margin="436,13,0,0" VerticalAlignment="Top" Name="Username"/>
         <Label Content="Description:" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top"/>
         <Label Content="Severity:" HorizontalAlignment="Left" Margin="24,203,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="88,203,0,0" VerticalAlignment="Top" Width="78"/>
+        <ComboBox HorizontalAlignment="Left" Margin="88,203,0,0" VerticalAlignment="Top" Width="78" Name="Severity"/>
         <Label Content="Bug Type:" HorizontalAlignment="Left" Margin="196,203,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="267,203,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="267,203,0,0" VerticalAlignment="Top" Width="120" Name="BugType"/>
     </Grid>
 </Window>
